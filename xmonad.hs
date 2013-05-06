@@ -23,6 +23,7 @@ import XMonad.Layout.ThreeColumns
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Circle
 import XMonad.Layout.PerWorkspace (onWorkspace)
+import XMonad.Layout.Tabbed
 import XMonad.Layout.Fullscreen
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
@@ -39,7 +40,8 @@ import Data.Ratio ((%))
   simpler parts of xmonad's behavior and are straightforward to tweak.
 -}
 
-myModMask            = mod1Mask       -- changes the mod key to left alt. mod4Mask is "super"
+--myModMask            = mod4Mask       -- changes the mod key to "super"
+myModMask            = mod1Mask       -- changes the mod key to "super"
 myFocusedBorderColor = "#ff0000"      -- color of focused border
 myNormalBorderColor  = "#cccccc"      -- color of inactive border
 myBorderWidth        = 1              -- width of border around windows
@@ -88,7 +90,7 @@ myWorkspaces =
   [
     "7:Chat",  "8:Dbg", "9:Pix",
     "4:Docs",  "5:Dev", "6:Web",
-    "1:Term",  "2:Hub", "3:Mail",
+    "1:Term",  "2:Biggie", "3:Mail",
     "0:VM",    "Extr1", "Extr2"
   ]
 
@@ -125,6 +127,10 @@ defaultLayouts = smartBorders(avoidStruts(
   -- bottom of the screen. Can be resized as described above.
   ||| Mirror (ResizableTall 1 (3/100) (1/2) [])
 
+  -- jonas likes tabs
+--  ||| tabbed shrinkText  tabConfig
+  ||| simpleTabbed
+
   -- Full layout makes every window full screen. When you toggle the
   -- active window, it will bring the active window to the front.
   ||| noBorders Full
@@ -134,8 +140,7 @@ defaultLayouts = smartBorders(avoidStruts(
   -- Master window is at top left.
   ||| Grid
 
-  -- ThreeColMid layout puts the large master window in the center
-  -- of the screen. As configured below, by default it takes of 3/4 of
+  -- ThreeColMid layout puts the large master window in the er  -- of the screen. As configured below, by default it takes of 3/4 of
   -- the available space. Remaining windows tile to both the left and
   -- right of the master window. You can resize using "super-h" and
   -- "super-l".
@@ -145,6 +150,15 @@ defaultLayouts = smartBorders(avoidStruts(
   -- Remaining windows appear in a circle around it
   ||| Circle))
 
+-- Colors for text and backgrounds of each tab when in "Tabbed" layout.
+--tabConfig = defaultTheme {
+--    activeBorderColor = "#7C7C7C",                                                                                                                                
+--    activeTextColor = "#CEFFAC",
+--    activeColor = "#000000",
+--    inactiveBorderColor = "#7C7C7C",
+--    inactiveTextColor = "#EEEEEE",
+--    inactiveColor = "#000000"
+--}
 
 -- Here we define some layouts which will be assigned to specific
 -- workspaces based on the functionality of that workspace.
