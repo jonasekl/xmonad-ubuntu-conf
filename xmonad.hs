@@ -88,7 +88,7 @@ myWorkspaces =
   [
     "7:Chat",  "8:Dbg", "9:Pix",
     "4:Docs",  "5:Dev", "6:Web",
-    "1:Term",  "2:Hub", "3:Mail",
+    "1:Term",  "2:biggie", "3:Mail",
     "0:VM",    "Extr1", "Extr2"
   ]
 
@@ -203,6 +203,10 @@ myKeyBindings =
     , ((myModMask, xK_a), sendMessage MirrorShrink)
     , ((myModMask, xK_z), sendMessage MirrorExpand)
     , ((myModMask, xK_p), spawn "synapse")
+
+-- Lock the screen using xscreensaver.
+   , ((myModMask .|. controlMask, xK_l),
+        spawn "gnome-screensaver-command --lock")
     , ((myModMask, xK_u), focusUrgent)
     , ((0, 0x1008FF12), spawn "amixer -q set Master toggle")
     , ((0, 0x1008FF11), spawn "amixer -q set Master 10%-")
