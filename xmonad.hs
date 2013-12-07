@@ -88,7 +88,7 @@ myUrgentWSRight = "}"
 
 myWorkspaces =
   [
-    "7:Chat",  "8:Dbg", "9:Pix",
+    "7:Keepass",  "8:Dbg", "9:Pix",
     "4:Docs",  "5:Dev", "6:Web",
     "1:Term",  "2:Biggie", "3:Mail",
     "0:VM",    "Extr1", "Extr2"
@@ -221,6 +221,8 @@ myKeyBindings =
     , ((0, 0x1008FF12), spawn "amixer -q set Master toggle")
     , ((0, 0x1008FF11), spawn "amixer -q set Master 10%-")
     , ((0, 0x1008FF13), spawn "amixer -q set Master 10%+")
+    -- start a pomodoro
+    , ((myModMask , xK_n), spawn "touch ~/.pomodoro_session")
   ]
 
 
