@@ -23,6 +23,7 @@ import XMonad.Layout.ThreeColumns
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Circle
 import XMonad.Layout.PerWorkspace (onWorkspace)
+import XMonad.Layout.Tabbed
 import XMonad.Layout.Fullscreen
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
@@ -40,6 +41,7 @@ import Data.Ratio ((%))
 -}
 
 myModMask            = mod1Mask       -- changes the mod key to left alt. mod4Mask is "super"
+--myModMask            = mod4Mask       -- changes the mod key to left alt. mod4Mask is "super"
 myFocusedBorderColor = "#ff0000"      -- color of focused border
 myNormalBorderColor  = "#cccccc"      -- color of inactive border
 myBorderWidth        = 1              -- width of border around windows
@@ -124,6 +126,12 @@ defaultLayouts = smartBorders(avoidStruts(
   -- master window is at the top, and remaining windows tile at the
   -- bottom of the screen. Can be resized as described above.
   ||| Mirror (ResizableTall 1 (3/100) (1/2) [])
+
+  -- jonas likes tabs
+  -- --  ||| tabbed shrinkText  tabConfig
+  -- jonas likes tabs
+--  ||| tabbed shrinkText  tabConfig
+  ||| simpleTabbed
 
   -- Full layout makes every window full screen. When you toggle the
   -- active window, it will bring the active window to the front.
