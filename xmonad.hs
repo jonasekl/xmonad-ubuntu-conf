@@ -88,9 +88,9 @@ myUrgentWSRight = "}"
 
 myWorkspaces =
   [
-    "7:keepass",  "8:Comics", "9:prd-retr",
-    "4:Dev web",  "5:Dev", "6:Web",
-    "1:Term",  "2:biggie", "3:Mail",
+    "7:intel",  "8:comics", "9:prd-retr",
+    "4:doc",  "5:dev", "6:www",
+    "1:term",  "2:g+", "3:mail",
     "0:VM",    "Extr1", "Extr2"
   ]
 
