@@ -35,6 +35,9 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import Data.Ratio ((%))
 
+import XMonad.Util.NamedWindows
+import XMonad.Util.Run
+
 {-
   Xmonad configuration variables. These settings control some of the
   simpler parts of xmonad's behavior and are straightforward to tweak.
@@ -88,13 +91,13 @@ myUrgentWSRight = "}"
 
 myWorkspaces =
   [
-    "7:intel",  "8:comics", "9:prd-retr",
+    "7:g+/tw",  "8:mail", "9:cal",
     "4:doc",  "5:dev", "6:www",
-    "1:term",  "2:g+", "3:mail",
-    "0:VM",    "Extr1", "Extr2"
+    "1:term",  "2:misc", "3:misc",
+    "0:VM",    "intel", "Extr2"
   ]
 
-startupWorkspace = "5:Dev"  -- which workspace do you want to be on after launch?
+startupWorkspace = "5:dev"  -- which workspace do you want to be on after launch?
 
 {-
   Layout configuration. In this section we identify which xmonad
@@ -335,6 +338,18 @@ myKeys = myKeyBindings ++
       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
   ]
 
+{-
+ - setup notification like a baws
+ -}
+data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
+
+instance UrgencyHook LibNotifyUrgencyHook where
+    urgencyHook LibNotifyUrgencyHook w = do
+        name    <- getName w
+        Just idx <- fmap (W.findTag w) $ gets windowset
+
+        safeSpawn "notify-send" [show name, "workspace " ++ idx]
+
 
 {-
   Here we actually stitch together all the configuration settings
@@ -344,7 +359,7 @@ myKeys = myKeyBindings ++
 
 main = do
   xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc"
-  xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
+  xmonad $ withUrgencyHook LibNotifyUrgencyHook $ defaultConfig {
     focusedBorderColor = myFocusedBorderColor
   , normalBorderColor = myNormalBorderColor
   , terminal = myTerminal
