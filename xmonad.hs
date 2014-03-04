@@ -45,7 +45,8 @@ import XMonad.Util.Run
 
 myModMask            = mod1Mask       -- changes the mod key to left alt. mod4Mask is "super"
 --myModMask            = mod4Mask       -- changes the mod key to left alt. mod4Mask is "super"
-myFocusedBorderColor = "#ff0000"      -- color of focused border
+--myFocusedBorderColor = "#ff0000"      -- color of focused border
+myFocusedBorderColor = "blue"      -- color of focused border
 myNormalBorderColor  = "#cccccc"      -- color of inactive border
 myBorderWidth        = 1              -- width of border around windows
 myTerminal           = "terminator"   -- which terminal software to use
@@ -339,7 +340,7 @@ myKeys = myKeyBindings ++
   ]
 
 {-
- - setup notification like a baws
+  setup notification like a baws
  -}
 data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
 
