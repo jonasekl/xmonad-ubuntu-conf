@@ -88,13 +88,13 @@ myUrgentWSRight = "}"
 
 myWorkspaces =
   [
-    "7:Chat",  "8:Dbg", "9:Pix",
-    "4:Docs",  "5:Dev", "6:Web",
-    "1:Term",  "2:Biggie", "3:Mail",
+    "7:jira",  "8:esb", "9:shs",
+    "4:?",  "5:term", "6:www",
+    "1:misc",  "2:misc", "3:misc",
     "0:VM",    "Extr1", "Extr2"
   ]
 
-startupWorkspace = "5:Dev"  -- which workspace do you want to be on after launch?
+startupWorkspace = "5:term"  -- which workspace do you want to be on after launch?
 
 {-
   Layout configuration. In this section we identify which xmonad
@@ -217,6 +217,8 @@ myKeyBindings =
     , ((myModMask, xK_a), sendMessage MirrorShrink)
     , ((myModMask, xK_z), sendMessage MirrorExpand)
     , ((myModMask, xK_p), spawn "synapse")
+    -- lock the screen
+    , ((myModMask .|. controlMask, xK_l), spawn "xscreensaver-command --lock")
     , ((myModMask, xK_u), focusUrgent)
     , ((0, 0x1008FF12), spawn "amixer -q set Master toggle")
     , ((0, 0x1008FF11), spawn "amixer -q set Master 10%-")
