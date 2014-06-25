@@ -88,13 +88,13 @@ myUrgentWSRight = "}"
 
 myWorkspaces =
   [
-    "7:jira",  "8:esb", "9:shs",
-    "4:?",  "5:term", "6:www",
-    "1:misc",  "2:misc", "3:misc",
+    "7:fuse",  "8:esb", "9:iipax",
+    "4:dev",  "5:puppet", "6:www",
+    "1:jira/rt",  "2:term", "3:mail",
     "0:VM",    "Extr1", "Extr2"
   ]
 
-startupWorkspace = "5:term"  -- which workspace do you want to be on after launch?
+startupWorkspace = "2:term"  -- which workspace do you want to be on after launch?
 
 {-
   Layout configuration. In this section we identify which xmonad
@@ -219,6 +219,10 @@ myKeyBindings =
     , ((myModMask, xK_p), spawn "synapse")
     -- lock the screen
     , ((myModMask .|. controlMask, xK_l), spawn "xscreensaver-command --lock")
+    , ((myModMask, xK_Print ), spawn "scrot ~/Bilder/screen_%Y-%m-%d-%H-%M-%S.png -d 1")
+    , ((myModMask .|. controlMask , xK_Print ), spawn "scrot ~/Bilder/screen_%Y-%m-%d-%H-%M-%S.png -s ")
+    -- start a pomodoro
+    , ((myModMask, xK_n), spawn "touch ~/.pomodoro_session")
     , ((myModMask, xK_u), focusUrgent)
     , ((0, 0x1008FF12), spawn "amixer -q set Master toggle")
     , ((0, 0x1008FF11), spawn "amixer -q set Master 10%-")
