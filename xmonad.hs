@@ -217,6 +217,7 @@ myKeyBindings =
     , ((myModMask, xK_a), sendMessage MirrorShrink)
     , ((myModMask, xK_z), sendMessage MirrorExpand)
     , ((myModMask, xK_p), spawn "synapse")
+    , ((myModMask, xK_d), spawn "dmenu_run")
     -- lock the screen
     , ((myModMask .|. controlMask, xK_l), spawn "xscreensaver-command --lock")
     , ((myModMask, xK_Print ), spawn "scrot ~/Bilder/screen_%Y-%m-%d-%H-%M-%S.png -d 1")
