@@ -23,6 +23,7 @@ import XMonad.Layout.ThreeColumns
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Circle
 import XMonad.Layout.PerWorkspace (onWorkspace)
+import XMonad.Layout.Tabbed
 import XMonad.Layout.Fullscreen
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
@@ -40,7 +41,7 @@ import Data.Ratio ((%))
   simpler parts of xmonad's behavior and are straightforward to tweak.
 -}
 
-myModMask            = mod4Mask       -- changes the mod key to "super"
+myModMask            = mod1Mask       -- changes the mod key to "super"
 myFocusedBorderColor = "#ff0000"      -- color of focused border
 myNormalBorderColor  = "#cccccc"      -- color of inactive border
 myBorderWidth        = 1              -- width of border around windows
@@ -89,13 +90,13 @@ myUrgentWSRight = "}"
 
 myWorkspaces =
   [
-    "7:Chat",  "8:Dbg", "9:Pix",
-    "4:Docs",  "5:Dev", "6:Web",
-    "1:Term",  "2:Hub", "3:Mail",
+    "7:mail/chat",  "8:misc", "9:misc",
+    "4:tasks",  "5:dev", "6:www",
+    "1:term1",  "2:term2", "3:term3",
     "0:VM",    "Extr1", "Extr2"
   ]
 
-startupWorkspace = "5:Dev"  -- which workspace do you want to be on after launch?
+startupWorkspace = "5:dev"  -- which workspace do you want to be on after launch?
 
 {-
   Layout configuration. In this section we identify which xmonad
@@ -121,12 +122,13 @@ defaultLayouts = smartBorders(avoidStruts(
   -- and remaining windows tile on the right. By default each area
   -- takes up half the screen, but you can resize using "super-h" and
   -- "super-l".
-  ResizableTall 1 (3/100) (1/2) []
+  Mirror (ResizableTall 1 (3/100) (1/2) [])
+  ||| ResizableTall 1 (3/100) (1/2) []
 
   -- Mirrored variation of ResizableTall. In this layout, the large
   -- master window is at the top, and remaining windows tile at the
   -- bottom of the screen. Can be resized as described above.
-  ||| Mirror (ResizableTall 1 (3/100) (1/2) [])
+  ||| simpleTabbed
 
   -- Full layout makes every window full screen. When you toggle the
   -- active window, it will bring the active window to the front.
@@ -205,9 +207,11 @@ myKeyBindings =
     ((myModMask, xK_b), sendMessage ToggleStruts)
     , ((myModMask, xK_a), sendMessage MirrorShrink)
     , ((myModMask, xK_z), sendMessage MirrorExpand)
-    , ((myModMask, xK_p), spawn "synapse")
-    , ((myModMask .|. mod1Mask, xK_space), spawn "synapse")
+    , ((myModMask, xK_d), spawn "dmenu_run -l 5")
     , ((myModMask, xK_u), focusUrgent)
+    , ((myModMask .|. controlMask, xK_l), spawn "xscreensaver-command --lock") 
+    , ((myModMask, xK_Print ), spawn "escrotum ~/Pictures/screen_%Y-%m-%d-%H-%M-%S.png")
+    , ((myModMask .|. controlMask , xK_Print ), spawn "escrotum -s ~/Pictures/screen_%Y-%m-%d-%H-%M-%S.png")
     , ((0, 0x1008FF12), spawn "amixer -q set Master toggle")
     , ((0, 0x1008FF11), spawn "amixer -q set Master 10%-")
     , ((0, 0x1008FF13), spawn "amixer -q set Master 10%+")
